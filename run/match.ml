@@ -1,36 +1,5 @@
 (*************** Logique de la grille **************)
 
-let red = "\x1b[41m"
-let blue = "\x1b[44m"
-let reset = "\x1b[0m"
-
-let afficher grille =
-  let ligne i = 
-    Printf.printf "%d |" i;
-    for j = 0 to 6 do
-      match grille.(j).(i) with
-        | None -> Printf.printf "   |"
-        | Some Tournoi.J1 -> Printf.printf "%s X %s|" red reset
-        | Some Tournoi.J2 -> Printf.printf "%s O %s|" blue reset
-    done;
-    Printf.printf "\n"
-  in
-  (* Indication des numéros de colonnes *)
-  Printf.printf "\n  ";
-  for i = 0 to 6 do
-    Printf.printf "  %d " i
-  done;
-  (* Lignes *)
-  Printf.printf "\n";
-  for i = 5 downto 0 do
-    ligne i
-  done;
-  (* Socle *)
-  Printf.printf "==+";
-  for _ = 0 to 6 do Printf.printf "===+" done;
-  Printf.printf "\n"
-
-
 let adversaire j = match j with
  | Tournoi.J1 -> Tournoi.J2
  | Tournoi.J2 -> Tournoi.J1
@@ -157,8 +126,6 @@ let run_match d1 d2 t =
         | Tournoi.J2 -> run_ia Ia2.ia (copy_matrix e) !j d2 "Ia2" t
         in 
         m := string_of_int(coup) :: !m;
-        afficher e;
-        flush stdout;
         try 
             jouer e coup !j;
             j := adversaire !j;
