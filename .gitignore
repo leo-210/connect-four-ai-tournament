@@ -1,0 +1,11 @@
+*.out
+*.cmo
+*.cmi
+*.cmx
+*.o
+match
+
+tournoi.zip
+
+# Fichiers de test 
+ia_*.ml
